@@ -1,3 +1,14 @@
+;;; my-joural.el --- Micah's org-mode journal helpers
+
+;; Copyright (C) 2014 Micah Werbitt
+
+;; Author: Micah Werbitt <micah@werbitt.net>
+;; Created: 13 June 2014
+;; Version: 0.0.1
+
+;;; Code:
+
+
 (setq journal-file "~/Dropbox/Journal/journal.org")
 (local-set-key (kbd "M--") '(insert "—"))
 
