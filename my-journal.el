@@ -1,4 +1,4 @@
-;;; my-joural.el --- Micah's org-mode journal helpers
+;;; my-journal.el --- Micah's org-mode journal helpers
 
 ;; Copyright (C) 2014 Micah Werbitt
 
