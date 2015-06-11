@@ -107,3 +107,5 @@ If none is specified, use today"
 	(goto-char (point))))))
 
 (provide 'my-journal)
+
+;;; my-journal.el ends here
