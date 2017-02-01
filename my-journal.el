@@ -9,7 +9,7 @@
 ;;; Code:
 
 
-(setq journal-file "~/Dropbox/Journal/journal.org")
+(setq journal-file "~/Sync/Journal/journal.org")
 (local-set-key (kbd "M--") '(insert "—"))
 
 (defun mw-journal-start-entry ()
