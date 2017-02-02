@@ -8,10 +8,7 @@
 
 ;;; Code:
 
-
 (setq journal-file "~/Sync/Journal/journal.org")
-
-(local-set-key (kbd "M--") '(insert "—"))
 
 (defun mw-journal-start-entry ()
   "Start a new journal entry."
