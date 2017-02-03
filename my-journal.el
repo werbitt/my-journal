@@ -10,14 +10,13 @@
 
 (setq journal-file "~/Sync/Journal/journal.org")
 
-(defun mw-journal-start-entry ()
-  "Start a new journal entry."
-  (interactive)
+(defun mw-journal-open (arg)
+  "Open my journal, if no prefix arguments are provided start a new entry"
+  (interactive "P")
   (find-file journal-file)
-  (mw-journal-new-entry)
-  (recenter))
-
-(global-set-key (kbd "C-c j") 'mw-journal-start-entry)
+  (when (= (car arg) nil)
+    (mw-journal-new-entry)
+    (recenter)))
 
 ;;;###autoload
 (defun mw-journal-insert-day-heading ()
