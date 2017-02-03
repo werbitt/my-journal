@@ -14,7 +14,7 @@
   "Open my journal, if no prefix arguments are provided start a new entry"
   (interactive "P")
   (find-file journal-file)
-  (when (= (car arg) nil)
+  (unless (car arg)
     (mw-journal-new-entry)
     (recenter)))
 
