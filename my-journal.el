@@ -15,6 +15,7 @@
   (interactive "P")
   (find-file journal-file)
   (unless (car arg)
+    (org-set-startup-visibility)
     (mw-journal-new-entry)
     (recenter)))
 
