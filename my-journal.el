@@ -27,6 +27,9 @@
 
 ;;;###autoload
 (defun mw-journal-new-entry ()
+  "Create a new journal entry.
+If there's already a new journal entry for the day, then add to the end.
+Narrow the buffer to the day's entry."
   (interactive)
   (let ((point-after-date-heading (mw-journal-find-date-heading)))
     (if point-after-date-heading
