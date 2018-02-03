@@ -28,19 +28,21 @@
 ;;;###autoload
 (defun mw-journal-new-entry ()
   (interactive)
-  (let ((new-date-p (mw-journal-find-date-heading)))
-    (or new-date-p
-	(progn
-	  (goto-char (point-min))
-	  (org-forward-heading-same-level 0 'invisible-ok)
-	  (mw-journal-insert-day-heading)))
-    (show-subtree)
-    (org-insert-subheading 't)
-    (insert (format-time-string "[%H:%M]"))
-    (mw-journal-move-subtree-to-end)
-    (end-of-line)
-    (newline)
-    (if new-date-p (open-line 0) (open-line 1))))
+  (let ((point-after-date-heading (mw-journal-find-date-heading)))
+    (if point-after-date-heading
+        (progn
+          (show-subtree)
+          (org-forward-heading-same-level 1 'invisible-ok)
+          (previous-line)
+          (newline)
+          (open-line 1))
+      (progn
+        (goto-char (point-min))
+        (org-forward-heading-same-level 0 'invisible-ok)
+        (mw-journal-insert-day-heading)
+        (newline 2)
+        (open-line 1))))
+  (org-narrow-to-subtree))
 
 ;;;###autoload
 (defun mw-journal-move-subtree-to-end ()
