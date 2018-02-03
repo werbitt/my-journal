@@ -4,7 +4,7 @@
 
 ;; Author: Micah Werbitt <micah@werbitt.net>
 ;; Created: 13 June 2014
-;; Version: 0.0.1
+;; Version: 0.0.2
 
 ;;; Code:
 
