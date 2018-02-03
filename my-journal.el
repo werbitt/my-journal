@@ -8,30 +8,31 @@
 
 ;;; Code:
 
-(setq journal-file "~/Sync/Journal/journal.org")
+(defvar my-journal-file "~/Sync/Journal/journal.org"
+  "The path of the journal file.")
 
-(defun mw-journal-open (arg)
+(defun my-journal-open (arg)
   "Open my journal, if no prefix arguments are provided start a new entry"
   (interactive "P")
-  (find-file journal-file)
+  (find-file my-journal-file)
   (unless (car arg)
     (org-set-startup-visibility)
-    (mw-journal-new-entry)
+    (my-journal-new-entry)
     (recenter)))
 
 ;;;###autoload
-(defun mw-journal-insert-day-heading ()
+(defun my-journal-insert-day-heading ()
   (interactive)
   (org-insert-heading)
-  (insert (mw-journal-date-heading-format (current-time))))
+  (insert (my-journal-date-heading-format (current-time))))
 
 ;;;###autoload
-(defun mw-journal-new-entry ()
+(defun my-journal-new-entry ()
   "Create a new journal entry.
 If there's already a new journal entry for the day, then add to the end.
 Narrow the buffer to the day's entry."
   (interactive)
-  (let ((point-after-date-heading (mw-journal-find-date-heading)))
+  (let ((point-after-date-heading (my-journal-find-date-heading)))
     (if point-after-date-heading
         (progn
           (show-subtree)
@@ -42,28 +43,28 @@ Narrow the buffer to the day's entry."
       (progn
         (goto-char (point-min))
         (org-forward-heading-same-level 0 'invisible-ok)
-        (mw-journal-insert-day-heading)
+        (my-journal-insert-day-heading)
         (newline 2)
         (open-line 1))))
   (org-narrow-to-subtree))
 
 ;;;###autoload
-(defun mw-journal-move-subtree-to-end ()
+(defun my-journal-move-subtree-to-end ()
   (interactive)
-  (and (ignore-errors (org-move-subtree-down 1)) (mw-journal-move-subtree-to-end)))
+  (and (ignore-errors (org-move-subtree-down 1)) (my-journal-move-subtree-to-end)))
 
 ;;;###autoload
-(defun mw-journal-date-heading-to-clipboard ()
+(defun my-journal-date-heading-to-clipboard ()
   "If point is on a timestamp, then copy my date heading to the clipboard,
 otherwise use today's date"
   (interactive)
   (let ((ts (or (and (org-at-timestamp-p)
 		     (apply 'encode-time (org-parse-time-string (match-string 0))))
 		(current-time))))
-    (kill-new (mw-journal-date-heading-format ts))))
+    (kill-new (my-journal-date-heading-format ts))))
 
 ;;;###autoload
-(defun mw-journal-date-heading-format (time)
+(defun my-journal-date-heading-format (time)
   "Make a Journal heading from a timestamp.
 A heading looks like this:
 current-time -> Friday, September 20th 2013"
@@ -71,17 +72,17 @@ current-time -> Friday, September 20th 2013"
     (concat
      (format-time-string "%A, %B " time)
      (number-to-string day-of-month)
-     (mw-journal-ordinal-suffix (nth 3 (decode-time time)))
+     (my-journal-ordinal-suffix (nth 3 (decode-time time)))
      (format-time-string ", %Y" time))))
 
 ;;;###autoload
-(defun mw-journal-format-day-of-month (time)
+(defun my-journal-format-day-of-month (time)
   "Return the day of the month formatted with no padding and an ordinal suffix"
   (format-time-string "%e" time))
 
 ;;;###autoload
 ;; Stolen from 'strings.el' who stole it from 'diary.el' ('diary-ordinal-suffix').
-(defun mw-journal-ordinal-suffix (n)
+(defun my-journal-ordinal-suffix (n)
   "Ordinal suffix for N.  That is, 'st', 'nd', 'rd', or 'th', as appropriate."
   (if (or (memq (% n 100) '(11 12 13)) (< 3 (% n 10)))
       "th"
@@ -90,14 +91,14 @@ current-time -> Friday, September 20th 2013"
 ;; Stolen from ergoemacs.org who stole it from Magnar Sveen
 ;; http://ergoemacs.org/emacs/modernization_elisp_lib_problem.html
 ;;;###autoload
-(defun mw-journal-trim-left (s)
+(defun my-journal-trim-left (s)
   "Remove whitespace at the beginning of S."
   (if (string-match "\\`[ \t\n\r]+" s)
       (replace-match "" t t s)
     s))
 
 ;;;###autoload
-(defun mw-journal-find-date-heading (&optional time)
+(defun my-journal-find-date-heading (&optional time)
   "Find a date heading for a given datetime.
 If none is specified, use today"
   (interactive)
@@ -106,7 +107,7 @@ If none is specified, use today"
     (save-restriction
       (when (re-search-forward
 	     (concat "^[ /t]*\\*+[[:space:]]+"
-		     (mw-journal-date-heading-format date)) nil t)
+		     (my-journal-date-heading-format date)) nil t)
 	(goto-char (point))))))
 
 (define-derived-mode my-journal-mode
