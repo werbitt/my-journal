@@ -106,6 +106,10 @@ If none is specified, use today"
 		     (mw-journal-date-heading-format date)) nil t)
 	(goto-char (point))))))
 
+(define-derived-mode my-journal-mode
+  org-mode "Journal"
+  "Major mode for my journal.")
+
 (provide 'my-journal)
 
 ;;; my-journal.el ends here
