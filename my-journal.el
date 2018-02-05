@@ -46,7 +46,16 @@ Narrow the buffer to the day's entry."
         (my-journal-insert-day-heading)
         (newline 2)
         (open-line 1))))
-  (org-narrow-to-subtree))
+  (my-journal-narrow-to-day (current-time)))
+
+;;;###autoload
+(defun my-journal-narrow-to-day (&optional time)
+  (interactive)
+  (let ((date (or time (my-journal-current-entry-date))))
+    (if date
+        (save-excursion
+          (progn (my-journal-find-date-heading date)
+                 (org-narrow-to-subtree))))))
 
 ;;;###autoload
 (defun my-journal-move-subtree-to-end ()
