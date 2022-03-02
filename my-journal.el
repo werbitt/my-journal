@@ -5,6 +5,13 @@
 ;; Author: Micah Werbitt <micah@werbitt.net>
 ;; Created: 13 June 2014
 ;; Version: 0.0.2
+;; Package-Requires: ((emacs "24.3"))
+;; URL: https://github.com/werbitt/my-journal.el
+
+;;; Commentary:
+
+;; my-journal.el provides a function to create new journal entries as well as
+;; some utility functions.
 
 ;;; Code:
 
@@ -12,7 +19,7 @@
   "The path of the journal file.")
 
 (defun my-journal-open (arg)
-  "Open my journal, if no prefix arguments are provided start a new entry"
+  "Open my journal, if no prefix arguments (ARG) are provided start a new entry."
   (interactive "P")
   (find-file my-journal-file)
   (unless (car arg)
