@@ -15,7 +15,7 @@
 
 ;;; Code:
 
-(defvar my-journal-file "~/Sync/Journal/journal.org"
+(defvar my-journal-file "~/OneDrive/Documents/Journal/journal.org"
   "The path of the journal file.")
 
 (defun my-journal-open (arg)
