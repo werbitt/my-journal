@@ -50,6 +50,7 @@ Narrow the buffer to the day's entry."
       (progn
         (goto-char (point-min))
         (org-forward-heading-same-level 0 'invisible-ok)
+        (forward-line -1)
         (my-journal-insert-day-heading)
         (newline 2)
         (open-line 1))))
